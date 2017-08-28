@@ -1,0 +1,15 @@
+{
+    "name": "test_toolbox_backend",
+    "version": "1.0.0",
+    "author": "geonunez <jorge.nunez@geonunez.com>",
+    "main": "server.js",
+    "scripts": {
+      "start": "node src/server.js"
+    },
+    "dependencies": {
+      "express": "^4.15.4",
+      "mongoose": "^4.11.9",
+      "method-override": "^2.3.9",
+      "body-parser": "^1.17.2"
+    }
+  }

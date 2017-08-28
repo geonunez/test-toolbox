@@ -7,4 +7,6 @@
 * Devuelve FizzBuzz si el número es divisible por 3 y por 5.
 
 #### ¿Cómo ejecutar node script.js
+```bash
+$ node script.js
 ```
