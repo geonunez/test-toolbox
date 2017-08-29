@@ -14,7 +14,7 @@ app.use(methodOverride());
 
 require('./routes.js')(app);
 
-mongoose.connect('mongodb://localhost/test-toolkit',
+mongoose.connect('mongodb://localhost/test-toolbox',
     { 
         useMongoClient: true
     },

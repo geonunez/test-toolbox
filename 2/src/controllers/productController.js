@@ -17,4 +17,29 @@ exports.findAllAction = (req, res) => {
         res.status(200)
             .jsonp(products);
     });
-}
+};
+
+/**
+ * Creates a new product.
+ */
+exports.postAction = (req, res) => {
+    console.log('POST');
+    console.log(req.body);
+
+    var product = new Product({
+        name:      req.body.name,
+        brand:     req.body.brand,
+        inventory: req.body.inventory,
+        hola: req.body.hola
+    });
+
+    console.log(product);
+
+    product.save(function(err, product) {
+        if(err) {
+          return res.status(500).send( err.message);
+        }
+
+        res.status(200).jsonp(product);
+    });
+};

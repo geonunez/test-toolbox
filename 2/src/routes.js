@@ -1,4 +1,4 @@
-"use strict"; 
+"use strict";
 
 module.exports = (app) => {
     // Index routes
@@ -11,6 +11,7 @@ module.exports = (app) => {
     var productController = require('./controllers/productController.js');
 
     app.route('/products')
-        .get(productController.findAllAction);
-        
+        .get(productController.findAllAction)
+        .post(productController.postAction);
+
 }
