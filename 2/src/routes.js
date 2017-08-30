@@ -2,16 +2,18 @@
 
 module.exports = (app) => {
     // Index routes
-    var indexController = require('./controllers/indexController.js');
+    var indexController = require('./controllers/indexController');
 
     app.route('/')
         .get(indexController.indexAction);
 
     // Product routes
-    var productController = require('./controllers/productController.js');
+    var productController = require('./controllers/productController');
 
     app.route('/products')
-        .get(productController.findAllAction)
-        .post(productController.postAction);
-
+        .get(productController.getAction);
+    app.route('/products/:id')
+        .get(productController.getOneAction);
+    
+    
 }

@@ -1,17 +1,22 @@
 "use strict";
 
-require('../models/product.js');
-
 var mongoose = require('mongoose');
 var Product  = mongoose.model('Product');
 
+var productService = require('../services/productService.js');
+
 /**
- * Finds all Products.
+ * Gets all Products.
  */
-exports.findAllAction = (req, res) => {
+exports.getAction = (req, res) => {
     Product.find((err, products) => {
         if (err) {
             res.send(500, err.message);
+        }
+
+        // Creates dummy data at first call
+        if (products.length === 0) {
+            products = productService.populate();
         }
 
         res.status(200)
@@ -20,26 +25,14 @@ exports.findAllAction = (req, res) => {
 };
 
 /**
- * Creates a new product.
+ * Gets a Product.
  */
-exports.postAction = (req, res) => {
-    console.log('POST');
-    console.log(req.body);
-
-    var product = new Product({
-        name:      req.body.name,
-        brand:     req.body.brand,
-        inventory: req.body.inventory,
-        hola: req.body.hola
-    });
-
-    console.log(product);
-
-    product.save(function(err, product) {
-        if(err) {
-          return res.status(500).send( err.message);
+exports.getOneAction = (req, res) => {
+    Product.findById(req.params.id, (err, product) => {
+        if (err) {
+            res.send(500, err.message);
         }
-
-        res.status(200).jsonp(product);
+        res.status(200)
+            .jsonp(product);
     });
 };

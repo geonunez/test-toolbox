@@ -12,8 +12,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
 
+// Registers schemas
+require('./schemas.js');
+// Defines routes
 require('./routes.js')(app);
 
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/test-toolbox',
     { 
         useMongoClient: true
