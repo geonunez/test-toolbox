@@ -14,6 +14,13 @@ module.exports = (app) => {
         .get(productController.getAction);
     app.route('/products/:id')
         .get(productController.getOneAction);
-    
-    
+
+    // Stock routes
+    var stockController = require('./controllers/stockController');
+
+    app.route('/products/:id/stock/add')
+        .post(stockController.addAction)
+
+    app.route('/products/:id/stock/subtract')
+        .post(stockController.subtractAction)
 }

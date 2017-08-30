@@ -11,7 +11,12 @@ var productSchema = new Schema ({
     history: [ StockModel.schema ]
 });
 
-productSchema.post('save', (product, next) => {
+/**
+ * Calculates the current stock.
+ *
+ * @param  Product product [description]
+ */
+function calculateStock(product) {
     var stock = 0;
     product.history.forEach((h) => {
         if (h.type === "add") {
@@ -19,9 +24,24 @@ productSchema.post('save', (product, next) => {
         } else {
             stock -= h.quantity;
         }
-    }, this);
+    }, product);
 
     product.stock = stock;
+}
+
+/**
+ * Pre hook on saving.
+ */
+productSchema.pre('save', function(next) {
+    calculateStock(this);
+    next();
+});
+
+/**
+ * Pre hook on updating.
+ */
+productSchema.pre('update', function(next) {
+    calculateStock(this);
     next();
 });
 
