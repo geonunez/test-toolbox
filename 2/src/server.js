@@ -12,6 +12,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // Registers schemas
 require('./schemas.js');
 // Defines routes
@@ -19,7 +25,7 @@ require('./routes.js')(app);
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/test-toolbox',
-    { 
+    {
         useMongoClient: true
     },
     (err, res) => {
